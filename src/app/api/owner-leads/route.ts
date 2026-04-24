@@ -68,8 +68,8 @@ export async function POST(request: NextRequest) {
           status: "new",
           source: data.source ?? "website",
         });
-      } catch {
-        // Supabase not configured — continue
+      } catch (supabaseErr) {
+        console.error("[owner-leads] Supabase insert failed:", supabaseErr);
       }
     }
 

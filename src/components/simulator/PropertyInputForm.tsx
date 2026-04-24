@@ -9,11 +9,13 @@ import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import type { RentalEstimateInput } from "@/lib/intelligence/rental-estimator";
 
+const MIN_SURFACE = 10;
+
 const schema = z.object({
   city: z.string().min(2, "Ville requise"),
   postalCode: z.string().optional(),
   propertyType: z.enum(["studio", "apartment", "house", "villa"]),
-  surface: z.number().min(10, "Surface minimale 10m²"),
+  surface: z.number().min(MIN_SURFACE, `Surface minimale ${MIN_SURFACE}m²`),
   bedrooms: z.number().min(0),
   sleeps: z.number().min(1),
   parking: z.boolean(),
@@ -113,7 +115,7 @@ export function PropertyInputForm({ onSubmit, loading }: Props) {
           <Input
             id="surface"
             type="number"
-            min={10}
+            min={MIN_SURFACE}
             {...register("surface")}
           />
         </div>
